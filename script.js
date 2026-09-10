@@ -90,4 +90,55 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileToggle.classList.toggle('active');
         });
     }
+
+    // ══════════════════════════════════════════════
+    // AJAX Form Submission (Formspree)
+    // ══════════════════════════════════════════════
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('.btn-submit');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Sending...';
+            submitBtn.disabled = true;
+            
+            const data = new FormData(contactForm);
+            
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    formStatus.innerHTML = '<div class="status-message success">Thanks for reaching out! We will get back to you shortly.</div>';
+                    contactForm.reset();
+                } else {
+                    const responseData = await response.json();
+                    if (responseData.hasOwnProperty('errors')) {
+                        formStatus.innerHTML = '<div class="status-message error">' + responseData.errors.map(error => error.message).join(', ') + '</div>';
+                    } else {
+                        formStatus.innerHTML = '<div class="status-message error">Oops! There was a problem submitting your form.</div>';
+                    }
+                }
+            } catch (error) {
+                formStatus.innerHTML = '<div class="status-message error">Oops! There was a problem submitting your form.</div>';
+            }
+            
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+            
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                formStatus.innerHTML = '';
+            }, 5000);
+        });
+    }
 });
