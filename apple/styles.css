@@ -33,7 +33,7 @@ html {
 body {
     font-family: "Helvetica Neue", "Helvetica Haas Grotesk Display", sans-serif;
     color: var(--text-dark);
-    min-height: 75vh;
+    min-height: 65vh;
     overflow-x: hidden;
     background:
         radial-gradient(ellipse 60% 45% at 25% 35%,
@@ -46,9 +46,8 @@ body {
             rgba(145, 75, 225, 0.9) 0%,
             rgba(145, 75, 225, 0) 75%),
         linear-gradient(180deg,
-            #ffffff 0%,
-            #f8f2ff 25%,
-            #dfc8ff 55%,
+            #f8f2ff 0%,
+            #dfc8ff 35%,
             #a968e8 78%,
             #7138c5 100%);
     background-attachment: fixed;
@@ -61,7 +60,7 @@ body {
     padding-top: 80px;
     /* offset for fixed navbar */
     position: relative;
-    min-height: 75vh;
+    min-height: 65vh;
 }
 
 /* ══════════════════════════════════════════════ */
@@ -77,10 +76,10 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.7);
+    background: transparent;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: none;
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1891,10 +1890,88 @@ body {
     }
 }
 
-grid-template-columns: 1fr;
+
+/* ══════════════════════════════════════════════ */
+/* INTERACTIVE VIDEO EXPANSION SECTION            */
+/* ══════════════════════════════════════════════ */
+.video-expansion-section {
+    position: relative;
+    width: 100%;
+    /* We make this section tall so we can scroll through the animation */
+    height: 250vh;
+    background: #f4f5f7;
+    z-index: 10;
 }
 
-.navbar {
-    padding: 12px 20px;
+.video-expansion-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
+
+/* Flowing wire */
+.flowing-wire-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.flowing-wire {
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    opacity: 0.6;
+}
+
+/* Video Wrapper Morphing Shape */
+.video-wrapper {
+    position: relative;
+    z-index: 2;
+    /* We make the wrapper full screen, and use clip-path to mask it */
+    width: 100vw;
+    height: 100vh;
+    margin-left: 0;
+    /* Initial state: masked to a box on the left */
+    clip-path: polygon(10% 25%, 45% 25%, 45% 75%, 10% 75%);
+    background: #000;
+}
+
+.showcase-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    /* Apply a slight bluish tint similar to the lusion site */
+    mix-blend-mode: screen;
+    filter: brightness(1.2) contrast(1.1) sepia(1) hue-rotate(180deg) saturate(3);
+}
+
+.video-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 8vw;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    pointer-events: none;
+    font-family: sans-serif;
+    letter-spacing: 5px;
+    opacity: 0;
+}
+
+.play-text, .reel-text {
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+>>>>>>> 80d5af478cdc39e3de5d4f5cc8d2641aae7602b0:apple/styles.css
 }

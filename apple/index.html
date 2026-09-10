@@ -58,9 +58,9 @@
         <div class="cloud cloud-5"></div>
     </div>
 
-
-    <!-- Huge Background Text -->
-    <div class="bg-massive-text">APPLEBERRY</div>
+    <div class="page-container">
+        <!-- Huge Background Text -->
+        <div class="bg-massive-text">APPLEBERRY SOLUTIONS</div>
 
     <!-- Hero Section (UNTOUCHED) -->
     <main class="hero" id="home">
@@ -101,6 +101,29 @@
 
     </div>
 
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- INTERACTIVE VIDEO EXPANSION                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="video-expansion-section" id="showcase">
+        <div class="video-expansion-container">
+            <!-- Flowing Blue Wire -->
+            <svg class="flowing-wire-svg" viewBox="0 0 1400 1200" preserveAspectRatio="xMidYMax slice">
+                <path class="flowing-wire" d="M-100,100 C300,-100 400,600 700,500 C1000,400 1100,1100 1500,900" fill="none" stroke="#4353ff" stroke-width="40" stroke-linecap="round"/>
+            </svg>
+            
+            <div class="video-wrapper">
+                <video autoplay loop muted playsinline class="showcase-video">
+                    <!-- Placeholder video -->
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay-text">
+                    <span class="play-text">PLAY</span>
+                    <span class="reel-text">REEL</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- SECTION 2: ABOUT US -->
     <!-- ═══════════════════════════════════════════ -->
@@ -357,6 +380,8 @@
         </svg>
     </a>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 
