@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="home">
 
     <!-- Fixed Navbar -->
     <nav class="navbar" id="navbar">
@@ -36,7 +36,7 @@
                     <li><a href="services.html#email">Email Solutions</a></li>
                 </ul>
             </li>
-            <li><a href="contact.html">BLOG</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
         </ul>
 
         <div class="nav-actions">
@@ -60,7 +60,7 @@
 
     <div class="page-container">
         <!-- Huge Background Text -->
-        <div class="bg-massive-text">APPLEBERRY SOLUTIONS</div>
+        <div class="bg-massive-text">APPLEBERRY</div>
 
     <!-- Hero Section (UNTOUCHED) -->
     <main class="hero" id="home">
@@ -69,7 +69,7 @@
 
                 <p class="hero-desc">
                 </p>
-                <a href="#" class="btn-dark">Let's Talk &rarr;</a>
+                <a href="contact.html" class="btn-dark">Let's Talk &rarr;</a>
             </div>
 
             <div class="hero-visual">
@@ -84,19 +84,7 @@
             </div>
         </div>
 
-        <!-- Bottom elements -->
-        <div class="bottom-bar">
-            <div class="pagination">
-                <span class="active">01</span>
-                <span>02</span>
-                <span>03</span>
-            </div>
-            <div class="categories">
-                <span>BRANDS</span>
-                <span>STORES</span>
-                <span>EXPERIENCES</span>
-            </div>
-        </div>
+
     </main>
 
     </div>
@@ -105,6 +93,14 @@
     <!-- INTERACTIVE VIDEO EXPANSION                 -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="video-expansion-section" id="showcase">
+        <svg width="0" height="0" style="position:absolute;">
+            <defs>
+                <clipPath id="video-rounded-mask" clipPathUnits="objectBoundingBox">
+                    <path id="video-mask-path" d="M 0.1500,0.3000 C 0.1500,0.2700 0.1700,0.2500 0.2000,0.2500 L 0.4000,0.2500 C 0.4300,0.2500 0.4500,0.2700 0.4500,0.3000 L 0.4500,0.7000 C 0.4500,0.7300 0.4300,0.7500 0.4000,0.7500 L 0.2000,0.7500 C 0.1700,0.7500 0.1500,0.7300 0.1500,0.7000 L 0.1500,0.3000 Z" />
+                </clipPath>
+            </defs>
+        </svg>
+
         <div class="video-expansion-container">
             <!-- Flowing Blue Wire -->
             <svg class="flowing-wire-svg" viewBox="0 0 1400 1200" preserveAspectRatio="xMidYMax slice">
@@ -113,14 +109,10 @@
             
             <div class="video-wrapper">
                 <video autoplay loop muted playsinline class="showcase-video">
-                    <!-- Placeholder video -->
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" type="video/mp4">
+                    <!-- Local WhatsApp video -->
+                    <source src="images/showcase-video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="video-overlay-text">
-                    <span class="play-text">PLAY</span>
-                    <span class="reel-text">REEL</span>
-                </div>
             </div>
         </div>
     </section>
@@ -180,7 +172,7 @@
                 <h2 class="section-heading animate-on-scroll" style="margin-bottom: 20px;">Our <span
                         class="text-gradient">Mission</span></h2>
                 <p class="section-intro animate-on-scroll"
-                    style="text-align: center; max-width: 800px; margin: 0 auto 60px auto;">
+                    style="max-width: 800px; margin-bottom: 60px;">
                     To empower businesses with innovative technology, creative solutions, and strategic digital
                     marketing
                     that drive growth, efficiency, and measurable results.
@@ -189,7 +181,7 @@
                 <h2 class="section-heading animate-on-scroll" style="margin-bottom: 20px;">Our <span
                         class="text-gradient">Vision</span></h2>
                 <p class="section-intro animate-on-scroll"
-                    style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    style="max-width: 800px;">
                     To become a trusted digital growth partner for businesses, helping them leverage technology and
                     creativity to build stronger brands, reach more customers, and achieve sustainable growth.
                 </p>
@@ -330,10 +322,10 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="images/logo.png" alt="Appleberry" class="logo-icon">
+                        <img src="images/logo-main.png" alt="Appleberry" class="logo-icon">
+                        <span>Appleberry</span>
                     </div>
-                    <p class="footer-desc">Turning your ideas into digital growth with integrated solutions under one
-                        roof.</p>
+                    <p class="footer-desc">Design.Marketing.Development</p>
                 </div>
 
                 <div class="footer-links-col">
@@ -350,15 +342,22 @@
                     <h4 class="footer-heading">Get in Touch</h4>
                     <ul class="footer-contact-list">
                         <li>
-                            <i class="contact-icon">📍</i>
-                            <span>123 Business Avenue, Tech Park,<br>City, Country</span>
-                        </li>
-                        <li>
-                            <i class="contact-icon">📞</i>
+                            <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg></div>
                             <span>+91 98765 43210</span>
                         </li>
                         <li>
-                            <i class="contact-icon">✉️</i>
+                            <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg></div>
                             <span>hello@appleberry.co</span>
                         </li>
                     </ul>

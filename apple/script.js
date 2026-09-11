@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof gsap !== 'undefined') {
                 const x = (e.clientX / window.innerWidth - 0.5) * 40; // Max 20px movement
                 const y = (e.clientY / window.innerHeight - 0.5) * 40;
-                
+
                 gsap.to(blob, {
                     x: x,
                     y: y,
@@ -118,16 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus = document.getElementById('form-status');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             const submitBtn = contactForm.querySelector('.btn-submit');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = 'Sending...';
             submitBtn.disabled = true;
-            
+
             const data = new FormData(contactForm);
-            
+
             try {
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Accept': 'application/json'
                     }
                 });
-                
+
                 if (response.ok) {
                     formStatus.innerHTML = '<div class="status-message success">Thanks for reaching out! We will get back to you shortly.</div>';
                     contactForm.reset();
@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 formStatus.innerHTML = '<div class="status-message error">Oops! There was a problem submitting your form.</div>';
             }
-            
+
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
-            
+
             // Clear message after 5 seconds
             setTimeout(() => {
                 formStatus.innerHTML = '';
@@ -175,9 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: ".video-expansion-section",
                 start: "top top",
-                end: "+=150%", // Scroll distance for the pinning
-                scrub: 1, // Smooth scrubbing
-                pin: true,
+                end: "+=150%", // Scrub over the 150vh sticky distance
+                scrub: 1 // Smooth scrubbing
             }
         });
 
@@ -191,26 +190,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Expand and morph the video wrapper using polygon clip-path
         // The wrapper is full screen, we are just animating the mask.
-        
+
         // Step A: Top right corner gets pulled aggressively to the right and up.
-        // Bottom right corner lags behind. Left side stays anchored.
-        tl.to(".video-wrapper", {
-            clipPath: "polygon(10% 25%, 80% 5%, 55% 85%, 10% 75%)",
+        tl.to("#video-mask-path", {
+            attr: { d: "M 0.1500,0.3000 C 0.1500,0.2700 0.1693,0.2448 0.1983,0.2371 L 0.8017,0.0629 C 0.8307,0.0552 0.8430,0.0687 0.8324,0.0968 L 0.5676,0.8032 C 0.5570,0.8313 0.5305,0.8457 0.5012,0.8392 L 0.1988,0.7608 C 0.1695,0.7543 0.1500,0.7300 0.1500,0.7000 L 0.1500,0.3000 Z" },
             duration: 0.8,
-            ease: "power2.out" // Fast pull
+            ease: "power2.out"
         }, 0);
 
-        // Step B: The rest of the shape catches up and it fills the entire screen
-        tl.to(".video-wrapper", {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        // Step B: The rest catches up and settles into a framed rectangle with margins
+        tl.to("#video-mask-path", {
+            attr: { d: "M 0.0400,0.1700 C 0.0400,0.1400 0.0600,0.1200 0.0900,0.1200 L 0.9100,0.1200 C 0.9400,0.1200 0.9600,0.1400 0.9600,0.1700 L 0.9600,0.8300 C 0.9600,0.8600 0.9400,0.8800 0.9100,0.8800 L 0.0900,0.8800 C 0.0600,0.8800 0.0400,0.8600 0.0400,0.8300 L 0.0400,0.1700 Z" },
             duration: 1.2,
             ease: "power2.inOut"
         }, 0.8);
-
-        // 3. Fade in the "PLAY REEL" text at the end of the expansion
-        tl.to(".video-overlay-text", {
-            opacity: 1,
-            duration: 0.5
-        }, 1.5);
     }
 });
