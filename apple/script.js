@@ -3,6 +3,34 @@
 // ══════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Massive Text Load Animation
+    if (typeof gsap !== 'undefined') {
+        gsap.from(".text-appleberry", {
+            x: 200,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+        gsap.from(".text-solutions", {
+            x: -200,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.3
+        });
+        gsap.from(".text-lets-grow", {
+            y: 50,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.8
+        });
+    }
+
+
+
+
+
     // Animate elements on scroll
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
@@ -22,17 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // ══════════════════════════════════════════════
     // Blob Parallax Effect
     // ══════════════════════════════════════════════
-    const blob = document.querySelector('.blob-main');
-    if (blob) {
+    const blobWrapper = document.querySelector('.floating-elements');
+    if (blobWrapper) {
         document.addEventListener('mousemove', (e) => {
             if (typeof gsap !== 'undefined') {
-                const x = (e.clientX / window.innerWidth - 0.5) * 40; // Max 20px movement
-                const y = (e.clientY / window.innerHeight - 0.5) * 40;
+                const x = (e.clientX / window.innerWidth - 0.5) * 100; // Increased movement
+                const y = (e.clientY / window.innerHeight - 0.5) * 100;
 
-                gsap.to(blob, {
+                gsap.to(blobWrapper, {
                     x: x,
                     y: y,
-                    duration: 1,
+                    duration: 1.5,
                     ease: "power2.out"
                 });
             }
@@ -164,45 +192,48 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ══════════════════════════════════════════════ */
-/* VIDEO EXPANSION ANIMATION (GSAP + ScrollTrigger) */
+/* TYPOGRAPHY WIRE ANIMATION (GSAP + ScrollTrigger) */
 /* ══════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-    // Only run if GSAP is loaded and the section exists
-    if (typeof gsap !== 'undefined' && document.querySelector('.video-expansion-section')) {
+    if (typeof gsap !== 'undefined' && document.querySelector('.typography-section')) {
         gsap.registerPlugin(ScrollTrigger);
+        
+        ScrollTrigger.create({
+            trigger: ".typography-section",
+            start: "top 60%", // Trigger when section is in view
+            once: true,
+            onEnter: () => {
+                // Text Split Reveal Animation
+                gsap.fromTo(".top-line", 
+                    { y: "100%", x: 0 }, 
+                    { y: "0%", duration: 0.6, ease: "power3.out" }
+                );
+                gsap.fromTo(".bottom-line", 
+                    { y: "-100%" }, 
+                    { y: "0%", duration: 0.6, ease: "power3.out" }
+                );
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".video-expansion-section",
-                start: "top top",
-                end: "+=150%", // Scrub over the 150vh sticky distance
-                scrub: 1 // Smooth scrubbing
+                // Left Align Animation
+                const topText = document.querySelector('.top-line');
+                const bottomText = document.querySelector('.bottom-line');
+                if (topText && bottomText) {
+                    const diff = (bottomText.offsetWidth - topText.offsetWidth) / 2;
+                    gsap.to(".top-line", {
+                        x: -diff,
+                        duration: 0.5,
+                        delay: 0.4, // Starts while reveal is finishing
+                        ease: "power2.out"
+                    });
+                }
+
+                // Wire Animation
+                gsap.to(".typo-wire", {
+                    strokeDashoffset: 0,
+                    duration: 3.5,
+                    ease: "power2.out",
+                    delay: 0.1
+                });
             }
         });
-
-        // 1. Draw the flowing wire
-        // Initial state is dashed out, we animate it to 0
-        tl.to(".flowing-wire", {
-            strokeDashoffset: 0,
-            duration: 2,
-            ease: "power1.inOut"
-        }, 0);
-
-        // 2. Expand and morph the video wrapper using polygon clip-path
-        // The wrapper is full screen, we are just animating the mask.
-
-        // Step A: Top right corner gets pulled aggressively to the right and up.
-        tl.to("#video-mask-path", {
-            attr: { d: "M 0.1500,0.3000 C 0.1500,0.2700 0.1693,0.2448 0.1983,0.2371 L 0.8017,0.0629 C 0.8307,0.0552 0.8430,0.0687 0.8324,0.0968 L 0.5676,0.8032 C 0.5570,0.8313 0.5305,0.8457 0.5012,0.8392 L 0.1988,0.7608 C 0.1695,0.7543 0.1500,0.7300 0.1500,0.7000 L 0.1500,0.3000 Z" },
-            duration: 0.8,
-            ease: "power2.out"
-        }, 0);
-
-        // Step B: The rest catches up and settles into a framed rectangle with margins
-        tl.to("#video-mask-path", {
-            attr: { d: "M 0.0400,0.1700 C 0.0400,0.1400 0.0600,0.1200 0.0900,0.1200 L 0.9100,0.1200 C 0.9400,0.1200 0.9600,0.1400 0.9600,0.1700 L 0.9600,0.8300 C 0.9600,0.8600 0.9400,0.8800 0.9100,0.8800 L 0.0900,0.8800 C 0.0600,0.8800 0.0400,0.8600 0.0400,0.8300 L 0.0400,0.1700 Z" },
-            duration: 1.2,
-            ease: "power2.inOut"
-        }, 0.8);
     }
 });

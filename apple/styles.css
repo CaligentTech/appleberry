@@ -38,7 +38,7 @@ img {
 body {
     font-family: "Helvetica Neue", "Helvetica Haas Grotesk Display", sans-serif;
     color: var(--text-dark);
-    min-height: 65vh;
+    min-height: 100vh;
     overflow-x: hidden;
     background:
         radial-gradient(ellipse 60% 45% at 25% 35%,
@@ -65,7 +65,9 @@ body {
     padding-top: 80px;
     /* offset for fixed navbar */
     position: relative;
-    min-height: 65vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ══════════════════════════════════════════════ */
@@ -81,9 +83,7 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: transparent;
     border-bottom: none;
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
@@ -93,8 +93,10 @@ body.home .navbar {
 }
 
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .nav-links {
@@ -175,8 +177,17 @@ body.home .navbar {
     color: var(--text-dark);
 }
 
-.logo-icon {
-    height: 65px;
+.nav-logo .logo-icon {
+    height: 108px;
+    width: auto;
+    margin-top: -25px; /* Pulls logo closer to the top to counter native image padding */
+    margin-bottom: -43px; /* Allows logo to overflow downwards without stretching navbar */
+    position: relative;
+    z-index: 10;
+}
+
+.footer-logo .logo-icon {
+    height: 35px;
     width: auto;
 }
 
@@ -221,15 +232,34 @@ body.home .navbar {
 
 .bg-massive-text {
     position: absolute;
-    top: 120px;
+    top: 180px;
     left: 40px;
-    font-size: 8vw;
+    font-size: 7.2vw;
     font-weight: 200;
-    color: #FFFFFF;
     z-index: 0;
-    white-space: nowrap;
-    letter-spacing: 0.1em;
+    letter-spacing: -0.03em;
     pointer-events: none;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-appleberry {
+    color: #7644cb;
+}
+
+.text-solutions {
+    color: #ffffff;
+    margin-top: -20px;
+}
+
+.text-lets-grow {
+    font-size: 1.5rem;
+    color: #000000;
+    font-weight: 500;
+    letter-spacing: normal;
+    margin-top: 5px;
+    align-self: flex-start;
 }
 
 /* ══════════════════════════════════════════════ */
@@ -241,12 +271,13 @@ body.home .navbar {
     padding: 40px 0;
     position: relative;
     z-index: 10;
+    flex: 1;
 }
 
 .hero-body {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
     flex: 1;
 }
@@ -254,6 +285,14 @@ body.home .navbar {
 .hero-content {
     flex: 1;
     max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-content .btn-dark {
+    margin-top: auto;
+    margin-bottom: 20px; /* Slight offset from the absolute bottom */
 }
 
 .subtitle {
@@ -290,12 +329,13 @@ body.home .navbar {
     background: #180b26;
     color: #fff;
     text-decoration: none;
-    padding: 14px 30px;
+    padding: 10px 40px;
     border-radius: 50px;
     font-weight: 500;
     font-size: 1.05rem;
     transition: 0.3s;
     display: inline-block;
+    white-space: nowrap;
 }
 
 .btn-dark:hover {
@@ -304,18 +344,41 @@ body.home .navbar {
 
 .hero-visual {
     position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.handwritten-note {
-    font-family: 'Caveat', cursive;
-    color: #a285cc;
-    font-size: 2.5rem;
-    line-height: 1;
-    transform: rotate(-15deg);
-    position: absolute;
-    right: -30px;
-    top: 0px;
+.floating-elements {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.blob-main {
+    width: 80%; /* 20% smaller */
+    height: auto;
+    position: relative;
+    z-index: 2;
+    animation: float-and-rotate 80s ease-in-out infinite;
+}
+
+@keyframes float-and-rotate {
+    0% { transform: translate(0px, 0px) rotate(0deg); }
+    20% { transform: translate(20px, -30px) rotate(72deg); }
+    40% { transform: translate(-30px, 10px) rotate(144deg); }
+    60% { transform: translate(-10px, -20px) rotate(216deg); }
+    80% { transform: translate(20px, 20px) rotate(288deg); }
+    100% { transform: translate(0px, 0px) rotate(360deg); }
+}
+
+
+
+
 
 /* Bottom elements */
 .bottom-bar {
@@ -837,55 +900,102 @@ body:not(.home) .section:first-of-type {
     padding-left: 60px;
 }
 
-.services-overview-grid {
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spin-border {
+    to { --angle: 360deg; }
+}
+
+.animated-glass-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px 20px;
+    gap: 30px;
+    padding: 40px 0;
 }
 
-.service-overview-card {
-    text-decoration: none;
-    color: inherit;
+.glass-anim-card {
+    display: block;
     position: relative;
+    width: calc(25% - 30px);
+    min-width: 220px;
+    height: 150px;
+    text-decoration: none;
+    perspective: 1000px;
+}
+
+.glass-inner {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    /* Remove static borders for spinning gradient */
+    border: none;
+    box-shadow: 
+        10px 15px 30px rgba(0, 0, 0, 0.1),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.4);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 15px;
     text-align: center;
-    gap: 15px;
-    width: calc(25% - 20px);
-    min-width: 220px;
-    box-sizing: border-box;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
 }
 
-.service-overview-card h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
+/* The spinning gradient border via mask */
+.glass-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px; /* border thickness */
+    /* Gradient colors: mostly transparent, with a glowing edge */
+    background: conic-gradient(from var(--angle), transparent 50%, #4353ff, #ff43a1, transparent 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: spin-border 3s linear infinite;
+}
+
+.glass-icon {
+    width: 42px;
+    height: 42px;
+    color: #111111;
+    margin-bottom: 8px;
+}
+
+.glass-title {
+    color: #111111;
+    font-size: 0.95rem;
+    font-weight: 600;
     line-height: 1.2;
 }
 
-.service-overview-card p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    flex: 1;
+.glass-line {
+    width: 25px;
+    height: 2px;
+    background: #111111;
+    border-radius: 2px;
+    margin-top: 10px;
 }
 
-.btn-know-more {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-radius: 50px;
-    transition: 0.3s;
-    margin-bottom: 10px;
+.glass-anim-card:hover .glass-inner {
+    transform: scale(1.08) translateY(-10px);
+    box-shadow: 
+        15px 25px 40px rgba(0, 0, 0, 0.15),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.6);
 }
 
-.service-overview-card:hover .btn-know-more {
-    background: var(--purple-primary);
+.glass-anim-card:hover {
+    z-index: 10;
 }
 
 /* ══════════════════════════════════════════════ */
@@ -2003,54 +2113,80 @@ body:not(.home) .section:first-of-type {
 
 
 /* ══════════════════════════════════════════════ */
-/* INTERACTIVE VIDEO EXPANSION SECTION            */
+/* TYPOGRAPHY STATEMENT SECTION                   */
 /* ══════════════════════════════════════════════ */
-.video-expansion-section {
+.typography-section {
     position: relative;
     width: 100%;
-    /* We make this section tall so we can scroll through the animation */
-    height: 250vh;
+    padding: 140px 0;
     background: #f4f5f7;
     z-index: 10;
-}
-
-.video-expansion-container {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 100vh;
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+}
+
+.typo-container {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.typo-heading {
+    font-size: 6rem;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #000000;
+    letter-spacing: -0.03em;
+    position: relative;
+    z-index: 3;
+}
+
+.split-line-wrapper {
+    display: block;
+    overflow: hidden;
+    padding: 0 10px;
+    margin: -10px -10px 0 -10px;
+}
+
+.split-line {
+    display: inline-block;
+}
+
+.top-line {
+    transform: translateY(100%);
+}
+
+.bottom-line {
+    transform: translateY(-100%);
 }
 
 /* Flowing wire */
-.flowing-wire-svg {
+.typo-wire-svg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 150%;
     z-index: 1;
     pointer-events: none;
 }
 
-.flowing-wire {
+.typo-wire {
     stroke-dasharray: 4000;
     stroke-dashoffset: 4000;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
-/* Video Wrapper Morphing Shape */
-.video-wrapper {
-    position: relative;
-    z-index: 2;
-    /* We make the wrapper full screen, and use clip-path to mask it */
-    width: 100vw;
-    height: 100vh;
-    margin-left: 0;
-    /* Initial state: masked via inline SVG clipPath to support rounded morphing */
-    clip-path: url(#video-rounded-mask);
-    background: transparent;
+@media (max-width: 992px) {
+    .typo-heading { font-size: 4rem; }
+}
+
+@media (max-width: 768px) {
+    .typo-heading { font-size: 3rem; }
+    .typography-section { padding: 120px 0; }
 }
