@@ -1,4 +1,16 @@
 // ══════════════════════════════════════════════
+// Window Load (Hide Loader with artificial delay)
+// ══════════════════════════════════════════════
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('loader-hidden');
+        }, 800); // 800ms artificial delay so it's visible locally
+    }
+});
+
+// ══════════════════════════════════════════════
 // Scroll Animations (Intersection Observer)
 // ══════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
@@ -132,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navActionsEl = document.querySelector('.nav-actions');
 
     if (mobileToggle) {
-        mobileToggle.addEventListener('click', () => {
-            navLinksEl.classList.toggle('mobile-open');
-            navActionsEl.classList.toggle('mobile-open');
+        mobileToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            navLinksEl.classList.toggle('active');
             mobileToggle.classList.toggle('active');
         });
     }
@@ -236,4 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+
 });
