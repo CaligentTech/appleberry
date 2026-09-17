@@ -152,6 +152,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ══════════════════════════════════════════════
+    // Mobile dropdown toggle (Double tap to go)
+    // ══════════════════════════════════════════════
+    const dropdownToggles = document.querySelectorAll('.nav-dropdown > a');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                const parent = this.parentElement;
+                if (!parent.classList.contains('mobile-open')) {
+                    e.preventDefault(); // Stop navigation on first tap
+                    parent.classList.add('mobile-open'); // Open dropdown
+                }
+            }
+        });
+    });
+
+    // ══════════════════════════════════════════════
     // AJAX Form Submission (Formspree)
     // ══════════════════════════════════════════════
     const contactForm = document.getElementById('contactForm');
