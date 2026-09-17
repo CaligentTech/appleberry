@@ -251,3 +251,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
+// ══════════════════════════════════════════════
+// Scroll to Top Button Logic
+// ══════════════════════════════════════════════
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
