@@ -26,8 +26,7 @@
     box-sizing: border-box;
 }
 
-html {
-}
+html {}
 
 img {
     max-width: 100%;
@@ -1397,7 +1396,7 @@ body:not(.home) .section:first-of-type {
 }
 
 .cta-center {
-    text-align: center;
+    text-align: left;
     position: relative;
     z-index: 1;
 }
@@ -1414,22 +1413,25 @@ body:not(.home) .section:first-of-type {
     font-size: 1.15rem;
     color: rgba(255, 255, 255, 0.7);
     max-width: 700px;
-    margin: 0 auto 16px;
+    margin: 0 0 16px 0;
     line-height: 1.7;
+    text-align: left;
 }
 
 .cta-tagline {
     font-size: 1.3rem;
     font-weight: 600;
     color: #d4a5ff;
-    margin-bottom: 40px;
+    margin: 0 0 40px 0;
+    max-width: 700px;
     font-style: italic;
+    text-align: left;
 }
 
 .cta-buttons {
     display: flex;
     gap: 20px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* ══════════════════════════════════════════════ */
@@ -1539,6 +1541,11 @@ body:not(.home) .section:first-of-type {
 .section-dark .form-group textarea {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.section-dark .form-group select option {
+    background: var(--dark-bg-alt);
     color: #ffffff;
 }
 
@@ -1711,6 +1718,7 @@ body:not(.home) .section:first-of-type {
     flex-direction: column;
     gap: 18px;
 }
+
 
 .footer-contact-list li {
     display: flex;
