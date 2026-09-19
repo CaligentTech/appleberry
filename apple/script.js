@@ -168,6 +168,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ══════════════════════════════════════════════
+    // Close mobile menu on regular link click
+    // ══════════════════════════════════════════════
+    const navItems = document.querySelectorAll('.nav-links a:not(.nav-dropdown > a)');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 992) {
+                if (navLinksEl && navLinksEl.classList.contains('active')) {
+                    navLinksEl.classList.remove('active');
+                    if (mobileToggle) mobileToggle.classList.remove('active');
+                    
+                    document.querySelectorAll('.nav-dropdown.mobile-open').forEach(dropdown => {
+                        dropdown.classList.remove('mobile-open');
+                    });
+                }
+            }
+        });
+    });
+
+    // ══════════════════════════════════════════════
     // AJAX Form Submission (Formspree)
     // ══════════════════════════════════════════════
     const contactForm = document.getElementById('contactForm');
