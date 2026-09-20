@@ -661,8 +661,8 @@ body:not(.home) .section:first-of-type {
 
 .minimal-list-item {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 15px;
     padding: 30px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -712,6 +712,7 @@ body:not(.home) .section:first-of-type {
     color: var(--text-dark);
     opacity: 0.8;
     margin: 0;
+    text-align: left !important;
 }
 
 .section-dark .list-item-right p {
@@ -1174,7 +1175,7 @@ body:not(.home) .section:first-of-type {
 .process-step-h {
     flex: 1;
     min-width: 200px;
-    text-align: center;
+    text-align: left;
     position: relative;
     padding: 30px 15px;
     background: rgba(255, 255, 255, 0.03);
@@ -1529,7 +1530,8 @@ body:not(.home) .section:first-of-type {
 }
 
 .section-dark .contact-item p {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
 }
 
 .section-dark .form-group label {
